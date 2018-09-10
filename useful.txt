@@ -1,0 +1,6 @@
+# Server Facts
+ansible local -m setup --tree /tmp/facts.json
+ansible local -m setup -a "filter=*ipv4*"
+ansible local -m setup -a "filter=ansible_*"
+ansible local -m setup -a "filter=ansible_kernel"
+ansible local -m setup -a "filter=ansible_dist*"

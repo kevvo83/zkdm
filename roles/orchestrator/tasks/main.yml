@@ -1,0 +1,6 @@
+--- # Installation Tasks specific to the Orchestrator Server
+- name: Pip Install passlib
+  pip:
+    name: passlib
+    state: present
+    executable: /usr/bin/pip3.7

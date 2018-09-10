@@ -1,0 +1,6 @@
+--- # Webservers specific variables to go in here
+webserverappusers:
+  - name: petshop
+    group: petbusiness
+  - name: petclinic
+    group: petbusiness

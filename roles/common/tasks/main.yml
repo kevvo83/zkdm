@@ -1,0 +1,15 @@
+--- # Common Tasks
+- name: Install Common RPMs
+  yum:
+    name: "{{RPMS}}"
+    state: present
+
+- name: Setup common users
+  user:
+    name: "{{item.name}}"
+    state: present
+  loop: "{{commonusers}}"
+
+# Generate the above users' SSH keys in keyfiles.
+#
+# The SSH keys of the ansible user must be added to the new users' authorized_keys file
