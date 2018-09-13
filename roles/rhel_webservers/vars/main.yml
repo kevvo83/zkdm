@@ -1,0 +1,6 @@
+--- # Webservers specific variables to go in here
+pkgs:
+  - httpd
+  - mod_ssl.x86_64
+  - mod_proxy_html.x86_64
+  - git.x86_64

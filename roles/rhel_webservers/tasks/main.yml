@@ -1,0 +1,27 @@
+--- # Build Web Server
+- name: Download & Install the Httpd Apacahe web server, and mod_ssl and mod_proxy
+  yum:
+    name: "{{pkgs}}"
+    state: latest
+  - notify:
+      ApacheInstalled
+- name: Create Web Server document root for the web application
+  file:
+    path: /var/www/petclinic
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+- name: Create the Vhosts.d directory
+  file:
+    path: /etc/httpd/vhost.d
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+- name: Deploy the Spring Boot web application from Git
+  git:
+    clone: yes
+    repo: https://github.com/kevvo83/spring-petclinic.git
+    dest: /var/www/petclinic
+
