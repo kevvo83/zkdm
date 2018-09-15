@@ -20,10 +20,8 @@
       nodes:
         masternodename: node-1
     smallvm: True
-    es_config_home: "{{ ansible_env.ES_PATH_CONF }}"
-    es_config_home_setting: /etc/elasticsearch
-    es_home: "{{ ansible_env.ES_HOME }}"
-    es_home_settig: /usr/shared/elasticsearch
+    es_config_home: /etc/elasticsearch
+    es_home: /usr/share/elasticsearch
 
   tasks:
     - name: Add Elastic search Repo into the Repositories LIst
@@ -37,58 +35,91 @@
       yum:
         name: "{{pkgs}}"
         state: present
+    - name: create ELASTICSEARCH Unix ID
+      user:
+        name: elasticsearch
+        shell: /bin/bash
+        group: elasticsearch
+        state: present
+        create_home: yes
+        home: /home/elasticsearch
+    - name: Set ELASTICSEACH Unix ID's default .bashrc if it's not defined
+      copy:
+        src: default_bashrc
+        dest: /home/elasticsearch/.bashrc
+        force: no
     - name: Set Elasticsearch Relevant permissions
       file:
         path: "{{item.dirpath}}"
-        owner: root
+        owner: elasticsearch
         group: elasticsearch
-        mode: 0754
+        mode: 0744
         recurse: yes
       loop:
         - dirpath: /usr/share/elasticsearch/
         - dirpath: /etc/elasticsearch/
     - name: Update ES_PATH_CONF environment variables for both ROOT and ELASTICSEARCH Unix IDs
+      vars:
+        envvar: ES_PATH_CONF
       lineinfile:
-        path: /"{{item.id}}"/.bashrc
-        mode: 0754
-        line: 
+        path: /{{item.homepath}}/.bashrc
+        mode: 0744
+        line: export ES_PATH_CONF={{es_config_home}}
       loop:
-        id: root
-        id: elasticsearch
+        - id: root
+          homepath: /root
+        - id: elasticsearch
+          homepath: /home/elasticsearch
       when:
-        es_config_home != es_config_home_setting
+        envvar not in ansible_env
     - name: Update ES_HOME environment variables for both ROOT and ELASTICSEARCH Unix IDs
+      vars:
+        envvar: ES_HOME
       lineinfile:
-        path: /"{{item.id}}"/.bashrc
-        mode: 0754
+        path: /{{item.homepath}}/.bashrc
+        mode: 0744
+        line: |
+          export ES_HOME={{es_home}}
+          export PATH=${PATH}:${ES_HOME}/bin
       loop:
-        id: root
-        id: elasticsearch
+        - id: root
+          homepath: /root
+        - id: elasticsearch
+          homepath: /home/elasticsearch
       when:
-        es_config_home != es_config_home_setting
-    - name: Add ${ES_HOME}/bin to $PATH environment variable
+        envvar not in ansible_env
     - name: Update configuration file elasticsearch.yml from template
       template:
         src: elasticsearch.yml.j2
-        dest: /etc/elasticsearch/elasticsearch.yml
-        owner: root
+        dest: /{{es_config_home}}/elasticsearch.yml
+        owner: elasticsearch
         group: elasticsearch
-        mode: 0754
+        mode: 0744
     - name: Update jvm.options to be able to run on small VMs
       lineinfile:
-        path: /etc/elasticsearch/jvm.options
-        regexp: '^Xms'
-        insertafter: '^Xms'
+        path: /{{es_config_home}}/jvm.options
+        regexp: '^-Xms'
+        insertafter: '^-Xms'
         state: present
-        line: 'Xms500m'
-        mode: 0754
+        line: '-Xms500m'
+        mode: 0744
+        owner: elasticsearch
+        group: elasticsearch
       when: smallvm
-    - name: Install Curator via PIP
-      pip:
+    # - name: Install Curator via PIP
+    # pip:
+    #    name: 
     - name: Register and Start elasticsearch as a managed service. On start of Elasticsearch as a Service, check for response JSON
       service:
-      notify:
-    
+        name: elasticsearch
+        enabled: yes
+        state: restarted
+      register: servicestartresult
+    - debug:
+        var: servicestartresult
+
+    - name: Update /var/log/elasticsearch to elasticsearch:elasticsearch chown
+    - name: Install the discovery-ec2 Elasticsearch Plugin 
 
 
 # Download and Install Elastic Search
