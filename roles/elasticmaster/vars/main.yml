@@ -1,0 +1,17 @@
+--- # Main Variable Declarations for the Elastic Master Build
+pkgs:
+  - httpd
+  - mod_ssl.x86_64
+  - mod_proxy_html.x86_64
+  - git.x86_64
+  - java-1.8.0-openjdk.x86_64
+  - elasticsearch
+elasticsearch:
+  clustername: zkdm-cluster
+  httpport: 9200
+  nodes:
+    masternodename: "{{ es_masternodename }}"
+smallvm: True
+es_config_home: /etc/elasticsearch
+es_home: /usr/share/elasticsearch
+

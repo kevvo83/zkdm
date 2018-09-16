@@ -6,133 +6,14 @@
   become_method: sudo
   gather_facts: yes
 
-  vars:
-    pkgs:
-      - httpd
-      - mod_ssl.x86_64
-      - mod_proxy_html.x86_64
-      - git.x86_64
-      - java-1.8.0-openjdk.x86_64
-      - elasticsearch
-    elasticsearch:
-      clustername: zkdm-cluster
-      httpport: 9200
-      nodes:
-        masternodename: node-1
-    smallvm: True
-    es_config_home: /etc/elasticsearch
-    es_home: /usr/share/elasticsearch
+  roles:
+    - { role: elasticmaster, es_masternodename: node-1 }
 
-  tasks:
-    - name: Add Elastic search Repo into the Repositories LIst
-      copy:
-        src: elasticsearch.repo
-        dest: /etc/yum.repos.d/
-        owner: root
-        group: root
-        mode: 0644
-    - name: Download and Install Elastic Search plus other valid Packages
-      yum:
-        name: "{{pkgs}}"
-        state: present
-    - name: create ELASTICSEARCH Unix ID
-      user:
+  post_tasks:
+
+    - name: Start ES as a Service
+      systemd:
         name: elasticsearch
-        shell: /bin/bash
-        group: elasticsearch
-        state: present
-        create_home: yes
-        home: /home/elasticsearch
-    - name: Set ELASTICSEACH Unix ID's default .bashrc if it's not defined
-      copy:
-        src: default_bashrc
-        dest: /home/elasticsearch/.bashrc
-        force: no
-    - name: Set Elasticsearch Relevant permissions
-      file:
-        path: "{{item.dirpath}}"
-        owner: elasticsearch
-        group: elasticsearch
-        mode: 0744
-        recurse: yes
-      loop:
-        - dirpath: /usr/share/elasticsearch/
-        - dirpath: /etc/elasticsearch/
-    - name: Update ES_PATH_CONF environment variables for both ROOT and ELASTICSEARCH Unix IDs
-      vars:
-        envvar: ES_PATH_CONF
-      lineinfile:
-        path: /{{item.homepath}}/.bashrc
-        mode: 0744
-        line: export ES_PATH_CONF={{es_config_home}}
-      loop:
-        - id: root
-          homepath: /root
-        - id: elasticsearch
-          homepath: /home/elasticsearch
-      when:
-        envvar not in ansible_env
-    - name: Update ES_HOME environment variables for both ROOT and ELASTICSEARCH Unix IDs
-      vars:
-        envvar: ES_HOME
-      lineinfile:
-        path: /{{item.homepath}}/.bashrc
-        mode: 0744
-        line: |
-          export ES_HOME={{es_home}}
-          export PATH=${PATH}:${ES_HOME}/bin
-      loop:
-        - id: root
-          homepath: /root
-        - id: elasticsearch
-          homepath: /home/elasticsearch
-      when:
-        envvar not in ansible_env
-    - name: Update configuration file elasticsearch.yml from template
-      template:
-        src: elasticsearch.yml.j2
-        dest: /{{es_config_home}}/elasticsearch.yml
-        owner: elasticsearch
-        group: elasticsearch
-        mode: 0744
-    - name: Update jvm.options to be able to run on small VMs
-      lineinfile:
-        path: /{{es_config_home}}/jvm.options
-        regexp: '^-Xms'
-        insertafter: '^-Xms'
-        state: present
-        line: '-Xms500m'
-        mode: 0744
-        owner: elasticsearch
-        group: elasticsearch
-      when: smallvm
-    # - name: Install Curator via PIP
-    # pip:
-    #    name: 
-    - name: Register and Start elasticsearch as a managed service. On start of Elasticsearch as a Service, check for response JSON
-      service:
-        name: elasticsearch
-        enabled: yes
         state: restarted
-      register: servicestartresult
-    - debug:
-        var: servicestartresult
-
-    - name: Update /var/log/elasticsearch to elasticsearch:elasticsearch chown
-    - name: Install the discovery-ec2 Elasticsearch Plugin 
-
-
-# Download and Install Elastic Search
-# Update the config/elasticsearch.yml file with the following information -
-#     clustername: zkdm-cluster
-#     node: node-1
-#     node.master: yes
-#     Leave Multicast Enabled
-#     node.data = true
-#     network.host = ansible_all_ipv4_addresses
-#     index.number_of_shards: 5 (i.e. Default)
-#     index.number of replicas: 1 (i.e. Default)
-# After all is successful, register elasticsearch as a service
-# Install Curator and curator_cli using pip
-# After that, Start Elastic search, and register the response JSON (not sure if this works when starting as service?)
-#
+        daemon_reload: yes
+      remote_user: elasticsearch

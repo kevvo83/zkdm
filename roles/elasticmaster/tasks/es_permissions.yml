@@ -1,0 +1,15 @@
+--- #Setup the ES Installations' Folder Permissions Properly
+
+- name: Set Elasticsearch Relevant permissions
+  file:
+    path: "{{item.dirpath}}"
+    owner: elasticsearch
+    group: elasticsearch
+    mode: 0744
+    recurse: yes
+  loop:
+    - dirpath: /usr/share/elasticsearch/
+    - dirpath: /etc/elasticsearch/
+    - dirpath: /var/log/elasticsearch
+  tags: es_perms
+
