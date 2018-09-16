@@ -1,0 +1,28 @@
+--- # Setup Unix IDs and Environment Variables and do Permissions right
+
+- name: create LOGSTASH Unix ID
+  user:
+    name: logstash
+    shell: /bin/bash
+    group: logstash
+    state: present
+    create_home: yes
+    home: /home/logstash
+
+- name: Set Logstash Unix ID's default .bashrc if it's not defined
+  copy:
+    src: files/default_bashrc
+    dest: /home/logstash/.bashrc
+    force: no
+
+- name: Update LOGSTASH_HOME environment variables for logstash Unix ID
+  lineinfile:
+    path: /{{item.homepath}}/.bashrc
+    regexp: '^export LOGSTASH'
+    line: export LOGSTASH=/usr/share/logstash
+    mode: 0744
+    owner: logstash
+    group: logstash
+  loop:
+    - id: logstash
+      homepath: /home/logstash

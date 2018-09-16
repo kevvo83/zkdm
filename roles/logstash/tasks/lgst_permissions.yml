@@ -1,0 +1,14 @@
+--- #Setup the Logstash Installations' Folder Permissions Properly
+
+- name: Set Logstash Relevant permissions
+  file:
+    path: "{{item.dirpath}}"
+    owner: logstash
+    group: logstash
+    mode: 0744
+    recurse: yes
+  loop:
+    - dirpath: /usr/share/logstash/
+    - dirpath: /etc/logstash/
+    - dirpath: /var/log/logstash
+

@@ -2,3 +2,6 @@
 - include_tasks: lgst_installation.yml
   tags:
     - lgst_pkg_install
+- include_tasks: lgst_unixid.yml
+  tags:
+    - es_unixid

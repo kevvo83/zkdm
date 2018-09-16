@@ -8,11 +8,3 @@
 
   roles:
     - { role: logstash }
-
-  post_tasks:
-
-    - name: Start ES as a Service
-      systemd:
-        name: elasticsearch
-        state: restarted
-        daemon_reload: yes
