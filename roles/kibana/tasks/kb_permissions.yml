@@ -1,0 +1,13 @@
+--- #Setup the KIbana Installations' Folder Permissions Properly
+
+- name: Set Kibana Relevant permissions
+  file:
+    path: "{{item.dirpath}}"
+    owner: kibana
+    group: kibana
+    mode: 0744
+    recurse: yes
+  loop:
+    - dirpath: /usr/share/kibana/
+    - dirpath: /etc/kibana/
+    - dirpath: /var/log/kibana

@@ -1,0 +1,8 @@
+--- # Main Variable Declarations for the Kibana Build
+pkgs:
+  - git.x86_64
+  - java-1.8.0-openjdk.x86_64
+  - kibana
+kibana:
+  servername: zkdm-cluster-kibanaserver
+  serverport: 5602

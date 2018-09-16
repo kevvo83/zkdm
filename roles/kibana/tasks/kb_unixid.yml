@@ -1,0 +1,17 @@
+--- # Setup Unix IDs and Environment Variables and do Permissions right
+
+- name: create Kibana Unix ID
+  user:
+    name: kibana
+    shell: /bin/bash
+    group: kibana
+    state: present
+    create_home: yes
+    home: /home/kibana
+
+- name: Set kibana Unix ID's default .bashrc if it's not defined
+  copy:
+    src: files/default_bashrc
+    dest: /home/kibana/.bashrc
+    force: no
+  tags: es_unixid

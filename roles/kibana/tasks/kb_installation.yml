@@ -1,0 +1,14 @@
+--- # Logstash Installation Tasks
+
+- name: Add Logstash search Repo into the Repositories LIst
+  copy:
+    src: files/kibana.repo
+    dest: /etc/yum.repos.d/
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Download and Install Logstash plus other valid Packages
+  yum:
+    name: "{{pkgs}}"
+    state: present
