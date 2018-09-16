@@ -1,6 +1,6 @@
---- # ES Installation Tasks
+--- # Logstash Installation Tasks
 
-- name: Add Elastic search Repo into the Repositories LIst
+- name: Add Logstash search Repo into the Repositories LIst
   copy:
     src: files/logstash.repo
     dest: /etc/yum.repos.d/
@@ -8,7 +8,7 @@
     group: root
     mode: 0644
 
-- name: Download and Install Elastic Search plus other valid Packages
+- name: Download and Install Logstash plus other valid Packages
   yum:
     name: "{{pkgs}}"
     state: present
