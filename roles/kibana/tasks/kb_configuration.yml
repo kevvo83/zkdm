@@ -4,6 +4,6 @@
   template:
     src: kibana.yml.j2
     dest: /{{kb_config_home}}/kibana.yml
-    owner: elasticsearch
-    group: elasticsearch
+    owner: kibana
+    group: kibana
     mode: 0744
