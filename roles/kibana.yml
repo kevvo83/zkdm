@@ -1,0 +1,12 @@
+--- # Build the Kibana Server
+- hosts: kibanaserver
+  connection: ssh
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+
+  roles:
+    - { role: kibana }
+
+
