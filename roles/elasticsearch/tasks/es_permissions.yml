@@ -11,5 +11,4 @@
     - dirpath: /usr/share/elasticsearch/
     - dirpath: /etc/elasticsearch/
     - dirpath: /var/log/elasticsearch
-  tags: es_perms
 

@@ -19,5 +19,9 @@ es_nodelist:
   - 172.31.115.7
   - 172.31.107.55
   - 172.31.105.238
-
+limits:
+  - {domain: elasticsearch, type: soft, limit: nofile, value: 65536}
+  - {domain: elasticsearch, type: hard, limit: nofile, value: 65536}
+  - {domain: elasticsearch, type: soft, limit: nproc, value: 4096}
+  - {domain: elasticsearch, type: hard, limit: nproc, value: 4096}
 

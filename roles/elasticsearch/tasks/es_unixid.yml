@@ -23,7 +23,7 @@
     regexp: '^export ES_PATH_CONF'
     line: export ES_PATH_CONF={{es_config_home}}
     mode: 0744
-    owner: elasticearch
+    owner: elasticsearch
     group: elasticsearch
   loop:
     - id: elasticsearch
@@ -54,4 +54,10 @@
     validate: '/usr/sbin/visudo -cf %s'
   tags: es_unixid
 
-
+- name: Ulimits settings for Elasticsearch user
+  pam_limits:
+    domain: "{{ item.domain }}"
+    limit_item: "{{ item.limit }}"
+    limit_type: "{{ item.type }}"
+    value: "{{ item.value }}"
+  loop: "{{ limits }}"

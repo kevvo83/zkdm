@@ -7,7 +7,7 @@
   gather_facts: yes
 
   roles:
-    - { role: elasticsearch, es_nodename: node-1 }
+    - { role: elasticmaster, es_masternodename: node-1 }
 
   post_tasks:
 
@@ -16,4 +16,3 @@
         name: elasticsearch
         state: restarted
         daemon_reload: yes
-      remote_user: elasticsearch

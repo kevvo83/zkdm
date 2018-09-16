@@ -7,7 +7,6 @@
     owner: elasticsearch
     group: elasticsearch
     mode: 0744
-  tags: es_config
 
 - name: Update jvm.options Xms to be able to run on small VMs
   lineinfile:
@@ -19,20 +18,18 @@
     owner: elasticsearch
     group: elasticsearch
   when: smallvm
-  tags: es_config
 
 - name: Update jvm.options Xmx to be able to run on small VMs
   lineinfile:
     path: /{{es_config_home}}/jvm.options
     regexp: '^-Xmx'
     state: present
-    line: '-Xmx600m'
+    line: '-Xmx500m'
     mode: 0744
     owner: elasticsearch
     group: elasticsearch
   when: smallvm
   tags: es_config
 
-- name: Install Discovery EC2 ES Plugin to run ES in AWS EC2 instance
-  command: /usr/share/elasticsearch/bin/elasticsearch-plugin install discovery-ec2
-  tags: es_config
+#- name: Install Discovery EC2 ES Plugin to run ES in AWS EC2 instance
+#  command: /usr/share/elasticsearch/bin/elasticsearch-plugin install discovery-ec2

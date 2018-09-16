@@ -7,13 +7,9 @@
     owner: root
     group: root
     mode: 0644
-  tags: es_yum_repo_cfg
 
 - name: Download and Install Elastic Search plus other valid Packages
   yum:
     name: "{{pkgs}}"
     state: present
-  tags: es_pkg_install
-
-
 

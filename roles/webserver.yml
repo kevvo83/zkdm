@@ -1,0 +1,14 @@
+--- # Build the Webserver with Apache Webserver and Kibana
+- hosts: webservers
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  connection: ssh
+  gather_facts: yes
+
+  roles:
+    - { role: webserver, esmasterhost:172.31.115.7, esmasterport:9200 }
+
+  post_tasks:
+    - name: Verify that HTTPD Service is Enabled and Running
+    - name: Verify that Kibana Service is Enabled and Running
