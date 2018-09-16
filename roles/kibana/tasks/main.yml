@@ -1,0 +1,13 @@
+--- # Main Tasks for Kibana Installation
+- include_tasks: kb_installation.yml
+  tags:
+    - lgst_pkg_install
+- include_tasks: kb_unixid.yml
+  tags:
+    - es_unixid
+- include_tasks: kb_permissions.yml
+  tags:
+    - kb_perms
+- include_tasks: kb_configuration.yml
+  tags:
+    - kb_config

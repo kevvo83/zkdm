@@ -6,3 +6,6 @@ pkgs:
 kibana:
   servername: zkdm-cluster-kibanaserver
   serverport: 5602
+elasticsearch:
+  masternodehost: 172.31.115.7
+  masternodeport: 9200

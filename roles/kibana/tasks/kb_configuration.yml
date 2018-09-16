@@ -1,6 +1,6 @@
 --- # Configure the Kibana Installation
 
-- name: Update configuration file kibana.yml from template
+- name: Update configuration file kibana.yml.j2 from template
   template:
     src: kibana.yml.j2
     dest: /{{es_config_home}}/kibana.yml
