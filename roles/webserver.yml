@@ -8,6 +8,7 @@
 
   roles:
     - { role: webserver, esmasterhost:172.31.115.7, esmasterport:9200 }
+    - { role: kibana }
 
   post_tasks:
     - name: Verify that HTTPD Service is Enabled and Running

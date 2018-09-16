@@ -1,7 +1,0 @@
-RPMS:
-  - java-1.8.0-openjdk.x86_64
-  - git-core.x86_64
-
-commonusers:
-  - name: devuser1
-  - name: devuser2
