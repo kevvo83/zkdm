@@ -20,7 +20,7 @@ cluster.name: {{ elasticsearch.clustername }}
 #
 # Use a descriptive name for the node:
 #
-node.name: {{ elasticsearch.nodes.masternodename }}
+node.name: {{ elasticsearch.nodes.nodename }}
 #
 # Add custom attributes to the node:
 #
@@ -65,7 +65,8 @@ http.port: {{ elasticsearch.httpport }}
 # Pass an initial list of hosts to perform discovery when new node is started:
 # The default list of hosts is ["127.0.0.1", "[::1]"]
 #
-discovery.zen.ping.unicast.hosts: ["172.31.115.7"]
+# discovery.zen.ping.unicast.hosts: ["172.31.115.7"]
+discovery.zen.ping.unicast.hosts: {{ es_nodelist }}
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #
