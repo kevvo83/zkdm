@@ -9,3 +9,5 @@ kibana:
 elasticsearch:
   masternodehost: 172.31.115.7
   masternodeport: 9200
+kb_config_home: /etc/kibana
+kb_home: /usr/share/kibana
