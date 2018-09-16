@@ -1,0 +1,4 @@
+--- # Main Tasks for Logstash Installation
+- include_tasks: lgst_installation.yml
+  tags:
+    - lgst_pkg_install

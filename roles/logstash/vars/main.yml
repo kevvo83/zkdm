@@ -1,0 +1,5 @@
+--- # Main Variable Declarations for the Elastic Master Build
+pkgs:
+  - git.x86_64
+  - java-1.8.0-openjdk.x86_64
+  - logstash
