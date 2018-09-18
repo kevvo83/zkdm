@@ -10,9 +10,9 @@
     - { role: webserver }
 
   post_tasks:
-      - name: Start HTTPD as a service
-        systemd:
-          name: httpd
-          state: restarted
-          daemon_reload: yes
-          enabled: yes
+    - name: Start HTTPD as a service
+      systemd:
+        name: httpd
+        state: restarted
+        daemon_reload: yes
+        enabled: yes
