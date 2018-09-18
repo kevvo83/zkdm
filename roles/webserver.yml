@@ -7,9 +7,12 @@
   gather_facts: yes
 
   roles:
-    - { role: webserver, esmasterhost:172.31.115.7, esmasterport:9200 }
-    - { role: kibana }
+    - { role: webserver }
 
   post_tasks:
-    - name: Verify that HTTPD Service is Enabled and Running
-    - name: Verify that Kibana Service is Enabled and Running
+      - name: Start HTTPD as a service
+        systemd:
+          name: httpd
+          state: restarted
+          daemon_reload: yes
+          enabled: yes
