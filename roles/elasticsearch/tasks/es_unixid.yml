@@ -10,6 +10,12 @@
     home: /home/elasticsearch
   tags: es_unixid
 
+- name: setup the Authorized Key that's relevant for this Cluster
+  authorized_key:
+    user: elasticsearch
+    state: present
+    key: "{{ lookup('file', 'files/KevinInitial.pub') }}"
+
 - name: Set ELASTICSEACH Unix ID's default .bashrc if it's not defined
   copy:
     src: files/default_bashrc
