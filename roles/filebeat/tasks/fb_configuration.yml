@@ -1,0 +1,10 @@
+--- # Configure the Filebeat Installation
+
+- name: Update configuration file filebeat.yml from template
+  template:
+    src: filebeat.yml.j2
+    dest: /{{fb_config_home}}/filebeat.yml
+    owner: filebeat
+    group: filebeat
+    mode: 0744
+

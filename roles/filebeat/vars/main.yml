@@ -3,3 +3,4 @@ pkgs:
   - git.x86_64
   - java-1.8.0-openjdk.x86_64
   - filebeat
+fb_config_home: /etc/filebeat

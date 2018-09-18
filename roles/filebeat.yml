@@ -9,4 +9,10 @@
   roles:
     - { role: filebeat }
 
-
+  post_tasks:
+    - name: Start Filebeat as a service
+      systemd:
+        name: filebeat
+        state: restarted
+        daemon_reload: yes
+        enabled: yes
