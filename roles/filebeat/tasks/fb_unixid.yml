@@ -1,6 +1,11 @@
 --- # Setup Unix IDs and Environment Variables and do Permissions right
 
-- name: create ELASTICSEARCH Unix ID
+- name: Ensure group Filebeat exists
+  group:
+    name: filebeat
+    state: present
+
+- name: create Filebeat Unix ID
   user:
     name: filebeat
     shell: /bin/bash
