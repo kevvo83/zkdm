@@ -7,7 +7,7 @@ kibana:
   servername: zkdm-cluster-kibanaserver
   serverport: 5602
 elasticsearch:
-  masternodehost: 172.31.115.7
+  masternodehost: 172.31.46.74
   masternodeport: 9200
 kb_config_home: /etc/kibana
 kb_home: /usr/share/kibana
