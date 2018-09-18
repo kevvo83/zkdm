@@ -2,10 +2,10 @@
 - include_tasks: fb_installation.yml
   tags:
     - fb_pkg_install
-- include_tasks: es_configuration.yml
+- include_tasks: fb_configuration.yml
   tags:
-    - es_config
-- include_tasks: es_unixid.yml
-- include_tasks: es_permissions.yml
+    - fb_config
+- include_tasks: fb_unixid.yml
+- include_tasks: fb_permissions.yml
   tags:
-    - es_perms
+    - fb_perms
