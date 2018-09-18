@@ -1,0 +1,15 @@
+[orchestrator]
+ip-172-31-41-9.us-east-2.compute.internal	ansible_ssh_private_key_file=/home/ansible/.ssh/KevinInitial.pem
+
+[elasticsearchcluster]
+ip-172-31-46-74.us-east-2.compute.internal	ansible_ssh_private_key_file=/home/ansible/.ssh/KevinInitial.pem es_nodename=node-1
+ip-172-31-33-65.us-east-2.compute.internal	ansible_ssh_private_key_file=/home/ansible/.ssh/KevinInitial.pem es_nodename=node-2
+
+[webserver]
+ip-172-31-45-17.us-east-2.compute.internal	ansible_ssh_private_key_file=/home/ansible/.ssh/KevinInitial.pem
+
+[logstashserver]
+ip-172-31-39-254.us-east-2.compute.internal	ansible_ssh_private_key_file=/home/ansible/.ssh/KevinInitial.pem
+
+[kibanaserver]
+ip-172-31-45-17.us-east-2.compute.internal	ansible_ssh_private_key_file=/home/ansible/.ssh/KevinInitial.pem

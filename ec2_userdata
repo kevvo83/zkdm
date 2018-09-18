@@ -10,3 +10,4 @@ echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqkeOj9lVL1bZ2ecutf9RMOK2YuH7k4t+Wqb
 echo 'export PS1="\[\e[1;34m\]\u@\h\[\e[0m\] \[\e[0;32m\]\$PWD>\[\e[0m\] "' >> ~ansible/.bashrc
 echo 'export ANSIBLE_CONFIG=/home/ansible/configs' >> ~ansible/.bashrc
 chown ansible:ansible ~ansible/.ssh/authorized_keys
+echo "ansible ALL=(ALL)       NOPASSWD: ALL" >> /etc/sudoers
