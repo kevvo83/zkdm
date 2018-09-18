@@ -1,5 +1,5 @@
 --- # Build the ElasticSearch Master Server
-- hosts: elasticsearchnode1
+- hosts: elasticsearchnode2
   connection: ssh
   remote_user: ansible
   become: yes
