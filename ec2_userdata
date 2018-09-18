@@ -7,3 +7,4 @@ touch ~ansible/.ssh/authorized_keys
 chmod 600 ~ansible/.ssh/authorized_keys
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCqkeOj9lVL1bZ2ecutf9RMOK2YuH7k4t+WqbJ+Bmmv2RoNwySDM8igVosMLmKc0ooAmdXJrGZdHkATWv3uDg6vSVQJFlazCdgMi3aph3qCwHpjHddsbhcAZeJ62tYSsKbNmj4BC7s4MBCWEe0Me/2ra+Xf6zuMkw2Z8r15poCTIfMQUks95r7X3xB2e7TZCCFt6xdTgKbT95fJBRZ80yAIN6N51fRDxRaiRYUREzifCTDHWlAr/i79r20QWQb81aNVJaHNQowZhfVJgDmbDLhxkmTDJ/TFROVw4cARXjNmOMFGJlkcaCM6FQ8VFFcKGY2w4wif3XU31gvc5o/CC0Ox" >> ~ansible/.ssh/authorized_keys
 echo 'export PS1="\[\e[1;34m\]\u@\h\[\e[0m\] \[\e[0;32m\]\$PWD>\[\e[0m\] "' >> ~ansible/.bashrc
+chown ansible:ansible ~ansible/.ssh/authorized_keys
