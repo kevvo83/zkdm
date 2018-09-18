@@ -1,0 +1,11 @@
+--- # Build the ElasticSearch Master Server
+- hosts: elasticsearchcluster
+  connection: ssh
+  remote_user: ansible
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+
+  roles:
+    - { role: elasticsearch }
+
