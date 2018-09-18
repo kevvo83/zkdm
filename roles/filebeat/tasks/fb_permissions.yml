@@ -1,0 +1,14 @@
+--- #Setup the Filebeats Installations' Folder Permissions Properly
+
+- name: Set Filebeat Relevant permissions
+  file:
+    path: "{{item.dirpath}}"
+    owner: filebeat
+    group: filebeat
+    mode: 0744
+    recurse: yes
+  loop:
+    - dirpath: /usr/share/elasticsearch/
+    - dirpath: /etc/elasticsearch/
+    #- dirpath: /var/log/elasticsearch
+
