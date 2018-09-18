@@ -1,0 +1,11 @@
+--- #Main Tasks file for Filebeat Role
+- include_tasks: fb_installation.yml
+  tags:
+    - fb_pkg_install
+- include_tasks: es_configuration.yml
+  tags:
+    - es_config
+- include_tasks: es_unixid.yml
+- include_tasks: es_permissions.yml
+  tags:
+    - es_perms
