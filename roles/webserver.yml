@@ -7,7 +7,7 @@
   gather_facts: yes
 
   roles:
-    - { role: webserver }
+    - { role: webservers }
 
   post_tasks:
     - name: Start HTTPD as a service
