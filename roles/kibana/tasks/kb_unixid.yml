@@ -9,6 +9,12 @@
     create_home: yes
     home: /home/kibana
 
+- name: setup the Authorized Key that's relevant for this Cluster
+  authorized_key:
+    user: kibana
+    state: present
+    key: "{{ lookup('file', 'files/KevinInitial.pub') }}"
+
 - name: Set kibana Unix ID's default .bashrc if it's not defined
   copy:
     src: files/default_bashrc

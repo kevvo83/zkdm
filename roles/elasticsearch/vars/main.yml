@@ -7,18 +7,18 @@ pkgs:
   - java-1.8.0-openjdk.x86_64
   - elasticsearch
 elasticsearch:
-  clustername: zkdm-cluster
-  httpport: 9200
+  clustername: "{{ es_clustername }}"
+  httpport: "{{ es_masternodeport }}"
   nodes:
     nodename: "{{ es_nodename }}"
 smallvm: True
 es_config_home: /etc/elasticsearch
 es_home: /usr/share/elasticsearch
 #es_nodelist: '"172.31.115.7","172.31.107.55","172.31.105.238"'
-es_nodelist:
-  - 172.31.115.7
-  - 172.31.107.55
-  - 172.31.105.238
+#es_nodelist:
+#  - 172.31.115.7
+#  - 172.31.107.55
+#  - 172.31.105.238
 limits:
   - {domain: elasticsearch, type: soft, limit: nofile, value: 65536}
   - {domain: elasticsearch, type: hard, limit: nofile, value: 65536}

@@ -9,3 +9,10 @@
   roles:
     - { role: elasticsearch }
 
+  post_tasks:
+    - name: Start ES as a service
+      systemd:
+        name: elasticsearch
+        state: restarted
+        daemon_reload: yes
+        enabled: yes

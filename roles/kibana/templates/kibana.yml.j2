@@ -25,7 +25,7 @@ server.host: {{ ansible_default_ipv4.address }}
 server.name: {{ kibana.servername }}
 
 # The URL of the Elasticsearch instance to use for all your queries.
-elasticsearch.url: http://{{ elasticsearch.masternodehost }}:{{ elasticsearch.masternodeport}}
+elasticsearch.url: http://{{ es_masternodeip }}:{{ es_masternodeport }}
 
 # When this setting's value is true Kibana uses the hostname specified in the server.host
 # setting. When the value of this setting is false, Kibana uses the hostname of the host

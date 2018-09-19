@@ -1,0 +1,7 @@
+es_nodelist:
+  - 172.31.46.74
+  - 172.31.33.65
+  - 172.31.36.107
+es_masternodeip: 172.31.46.74
+es_masternodeport: 9200
+es_clustername: zkdm-cluster
