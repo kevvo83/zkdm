@@ -5,3 +5,4 @@
 - include_tasks: lgst_unixid.yml
   tags:
     - es_unixid
+- include_tasks: lgst_permissions.yml
